@@ -71,7 +71,7 @@
     <footer class="footer"><div>© 2026 ZeTaX. CS2 demo intelligence.</div><div>Built for players • creators • teams</div></footer>
   </div>
 </div>
-<div class="modal" id="modal"><div class="modal-box"><button class="close" id="close">×</button><h3>Analyze a CS2 demo</h3><p>Choose a local <b>.dem</b> file. This first website prototype only demonstrates the interface; the actual parser will be connected in the next build stage.</p><input class="input" type="file" accept=".dem"><button class="btn primary" id="start">Continue →</button></div></div>
+<div class="modal" id="modal"><div class="modal-box"><button class="close" id="close">×</button><h3>Analyze a CS2 demo</h3><p>Choose a local <b>.dem</b> file. This first website prototype only demonstrates the interface; the actual parser will be connected in the next build stage.</p><input class="input" id="demoFile" type="file" accept=".dem"><button class="btn primary" id="start">Continue →</button></div></div>
 <div class="toast" id="toast">Demo workflow opened.</div>
 <script>
 const modal=document.getElementById('modal'),toast=document.getElementById('toast');
