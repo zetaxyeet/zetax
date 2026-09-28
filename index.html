@@ -74,13 +74,161 @@
 <div class="modal" id="modal"><div class="modal-box"><button class="close" id="close">×</button><h3>Analyze a CS2 demo</h3><p>Choose a local <b>.dem</b> file. This first website prototype only demonstrates the interface; the actual parser will be connected in the next build stage.</p><input class="input" id="demoFile" type="file" accept=".dem"><button class="btn primary" id="start">Continue →</button></div></div>
 <div class="toast" id="toast">Demo workflow opened.</div>
 <script>
-const modal=document.getElementById('modal'),toast=document.getElementById('toast');
-function openModal(){modal.classList.add('open')};
-function closeModal(){modal.classList.remove('open')};
-['uploadNav','heroUpload','chooseDemo','ctaUpload'].forEach(id=>document.getElementById(id).addEventListener('click',openModal));
-document.getElementById('login').addEventListener('click',()=>{toast.textContent='Account system coming next.';toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2200)});
-document.getElementById('close').addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
-document.getElementById('start').addEventListener('click',async()=>{const file=demoFile.files[0];if(!file){toast.textContent='Choose a .dem file first.';toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2200);return}if(!file.name.toLowerCase().endsWith('.dem')){toast.textContent='Only .dem files are accepted.';toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2200);return}toast.textContent='Uploading demo…';toast.classList.add('show');try{const formData=new FormData();formData.append('file',file,file.name);const r=await fetch('https://zetax-api.zetaxyeet.workers.dev/api/upload',{method:'POST',body:formData});const data=await r.json();toast.textContent=data.success?`Demo stored • ${(data.size/1024/1024).toFixed(1)} MB`:(data.error||'Upload failed.')}catch(e){toast.textContent='API connection failed.'}setTimeout(()=>{toast.classList.remove('show');closeModal()},2800)});
+const modal=document.getElementById('modal'),toast=document.getElementById('toast'),demoFile=document.getElementById('demoFile');
+
+function openModal(){
+  modal.classList.add('open')
+};
+
+function closeModal(){
+  modal.classList.remove('open')
+};
+
+['uploadNav','heroUpload','chooseDemo','ctaUpload'].forEach(id=>{
+  document.getElementById(id).addEventListener('click',openModal)
+});
+
+document.getElementById('login').addEventListener('click',()=>{
+  toast.textContent='Account system coming next.';
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),2200)
+});
+
+document.getElementById('close').addEventListener('click',closeModal);
+
+modal.addEventListener('click',e=>{
+  if(e.target===modal)closeModal()
+});
+
+document.getElementById('start').addEventListener('click',async()=>{
+  const file=demoFile.files[0];
+
+  if(!file){
+    toast.textContent='Choose a .dem file first.';
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'),2200);
+    return
+  }
+
+  if(!file.name.toLowerCase().endsWith('.dem')){
+    toast.textContent='Only .dem files are accepted.';
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'),2200);
+    return
+  }
+
+  toast.textContent='Preparing upload…';
+  toast.classList.add('show');
+
+  try{
+    const api='https://zetax-api.zetaxyeet.workers.dev';
+
+    // Create multipart upload
+    const create=await fetch(api+'/api/upload/create',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        filename:file.name
+      })
+    });
+
+    const created=await create.json();
+
+    if(!create.ok){
+      throw new Error(created.error||'Could not start upload.');
+    }
+
+    // 10 MB chunks
+    const chunkSize=10*1024*1024;
+    const parts=[];
+
+    let partNumber=1;
+
+    for(
+      let offset=0;
+      offset<file.size;
+      offset+=chunkSize,partNumber++
+    ){
+      const chunk=file.slice(
+        offset,
+        Math.min(offset+chunkSize,file.size)
+      );
+
+      toast.textContent=
+        'Uploading part '+partNumber+
+        ' of '+Math.ceil(file.size/chunkSize)+'…';
+
+      const part=await fetch(
+        api+
+        '/api/upload/part?key='+
+        encodeURIComponent(created.key)+
+        '&uploadId='+
+        encodeURIComponent(created.uploadId)+
+        '&partNumber='+
+        partNumber,
+        {
+          method:'PUT',
+          body:chunk
+        }
+      );
+
+      const data=await part.json();
+
+      if(!part.ok){
+        throw new Error(
+          data.error||'Part upload failed.'
+        );
+      }
+
+      parts.push({
+        partNumber:data.partNumber,
+        etag:data.etag
+      });
+    }
+
+    // Complete multipart upload
+    toast.textContent='Finishing upload…';
+
+    const complete=await fetch(
+      api+'/api/upload/complete',
+      {
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          key:created.key,
+          uploadId:created.uploadId,
+          parts:parts
+        })
+      }
+    );
+
+    const done=await complete.json();
+
+    if(!complete.ok){
+      throw new Error(
+        done.error||'Could not complete upload.'
+      );
+    }
+
+    toast.textContent=
+      'Demo stored • '+
+      (file.size/1024/1024).toFixed(1)+
+      ' MB';
+
+  }catch(e){
+    toast.textContent=
+      'Upload failed: '+e.message;
+  }
+
+  setTimeout(()=>{
+    toast.classList.remove('show');
+    closeModal();
+  },2800);
+});
 </script>
 </body>
 </html>
