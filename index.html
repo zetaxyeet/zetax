@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZeTaX — CS2 Demo Intelligence</title>
+<style>
+:root{color-scheme:light dark;--bg:#08090b;--surface:#0f1115;--surface2:#15181d;--surface3:#1b1f25;--text:#f4f5f6;--muted:#8e949d;--line:#292e36;--accent:#d8ff3e;--accent2:#a7c928;--danger:#ff5d62;--radius:18px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#08090b;color:var(--text)}button{font:inherit}.root{min-height:100vh;background:linear-gradient(180deg,#08090b 0%,#0a0c0f 55%,#08090b 100%);overflow:hidden}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}.nav{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06)}.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:-1px;font-size:22px}.mark{width:31px;height:31px;border:2px solid var(--accent);display:grid;place-items:center;transform:skew(-10deg);box-shadow:0 0 22px rgba(216,255,62,.08)}.mark:after{content:"X";font-size:14px;color:var(--accent);font-weight:1000;transform:skew(10deg)}.links{display:flex;gap:28px}.links a{color:#aeb3ba;text-decoration:none;font-size:14px}.links a:hover{color:white}.nav-actions{display:flex;gap:10px}.btn{border:1px solid var(--line);background:#111318;color:#e9ebed;padding:11px 17px;border-radius:10px;cursor:pointer;font-weight:750}.btn:hover{background:#191c21}.btn.primary{background:var(--accent);color:#090b08;border-color:var(--accent);box-shadow:0 0 30px rgba(216,255,62,.10)}.btn.primary:hover{background:#e2ff62}.hero{padding:92px 0 70px;position:relative}.hero:before{content:"";position:absolute;width:650px;height:430px;right:-260px;top:20px;background:radial-gradient(circle,rgba(216,255,62,.12),transparent 65%);pointer-events:none}..eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-size:12px;font-weight:850;letter-spacing:1.5px;text-transform:uppercase}.dot{width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 12px var(--accent)}h1{font-size:clamp(52px,8vw,92px);line-height:.91;letter-spacing:-6px;margin:20px 0 26px;max-width:900px}.accent{color:var(--accent)}.hero p{max-width:650px;color:#9ba1aa;font-size:18px;line-height:1.65;margin:0 0 32px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.trust{display:flex;gap:22px;margin-top:42px;color:#686e77;font-size:12px;align-items:center}.trust strong{color:#c3c7cc}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 90px}.stat{padding:22px;background:linear-gradient(145deg,#111419,#0d0f12);border:1px solid var(--line);border-radius:14px}.stat b{font-size:27px;display:block}.stat span{color:#747b84;font-size:12px}.section{padding:30px 0 90px}.section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:25px}.kicker{font-size:11px;letter-spacing:1.5px;color:var(--accent);text-transform:uppercase;font-weight:850}.section h2{font-size:39px;letter-spacing:-2px;margin:8px 0 0}.section-head p{color:#777e88;max-width:450px;line-height:1.55;margin:0}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:#0e1014;border:1px solid var(--line);border-radius:16px;padding:25px;min-height:220px}.icon{width:42px;height:42px;border-radius:11px;background:#181c20;border:1px solid #2a3038;display:grid;place-items:center;color:var(--accent);font-weight:900;margin-bottom:30px}.card h3{margin:0 0 10px;font-size:19px}.card p{margin:0;color:#7e858e;line-height:1.55;font-size:14px}.demo{display:grid;grid-template-columns:1.4fr .6fr;gap:14px}.panel{background:#0e1014;border:1px solid var(--line);border-radius:16px;padding:22px}.panel-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.panel-title{font-weight:800}.badge{font-size:10px;color:var(--accent);background:rgba(216,255,62,.08);border:1px solid rgba(216,255,62,.18);padding:6px 8px;border-radius:7px}.upload{border:1px dashed #3b4149;border-radius:13px;min-height:175px;display:grid;place-items:center;text-align:center;padding:25px;background:repeating-linear-gradient(135deg,#0e1014,#0e1014 8px,#101217 8px,#101217 16px)}.upload b{display:block;margin-bottom:8px}.upload span{font-size:12px;color:#707781}.upload .btn{margin-top:15px}.rows{display:flex;flex-direction:column;gap:9px}.row{display:grid;grid-template-columns:1fr auto;gap:15px;padding:13px 14px;background:#12151a;border:1px solid #20252c;border-radius:11px}.row small{color:#737a83}.score{color:var(--accent);font-weight:850}.leader{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #20242a}.leader:last-child{border-bottom:0}.rank{width:24px;color:#646a72;font-size:12px}.avatar{width:32px;height:32px;border-radius:9px;background:#20252c;display:grid;place-items:center;font-size:11px;font-weight:800}.lname{flex:1;font-size:13px}.xp{font-size:11px;color:#777e87}.cta{border:1px solid #343b43;border-radius:20px;padding:52px;background:linear-gradient(135deg,#11151a,#0b0d10);position:relative;overflow:hidden}.cta:after{content:"Z";position:absolute;right:30px;bottom:-75px;font-size:280px;font-weight:1000;color:rgba(216,255,62,.035);line-height:1}.cta h2{font-size:48px;letter-spacing:-3px;margin:0 0 13px;max-width:650px}.cta p{color:#808791;max-width:560px;line-height:1.6}.footer{padding:35px 0 50px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;color:#60666f;font-size:12px}.toast{position:fixed;right:20px;bottom:20px;background:#171b20;border:1px solid #333942;border-radius:12px;padding:14px 16px;box-shadow:0 15px 45px #0009;transform:translateY(130px);transition:.25s;z-index:10}.toast.show{transform:none}.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:20px;z-index:9}.modal.open{display:flex}.modal-box{width:min(520px,100%);background:#111419;border:1px solid #343a43;border-radius:18px;padding:25px}.modal-box h3{margin-top:0}.modal-box p{color:#858c95;line-height:1.6}.input{width:100%;background:#0a0c0f;border:1px solid #2b3038;color:white;padding:13px;border-radius:10px;margin:8px 0 16px;outline:none}.close{float:right;background:none;border:0;color:#777;cursor:pointer;font-size:20px}@media(max-width:850px){.links{display:none}.grid{grid-template-columns:repeat(2,1fr)}.features{grid-template-columns:1fr}.demo{grid-template-columns:1fr}.hero{padding-top:65px}h1{letter-spacing:-4px}.cta h2{font-size:37px}}@media(max-width:520px){.wrap{width:min(100% - 24px,1180px)}.nav-actions .btn:first-child{display:none}.grid{grid-template-columns:1fr 1fr}.stat{padding:16px}.stat b{font-size:22px}.hero p{font-size:16px}.cta{padding:30px}.footer{display:block}.footer div+div{margin-top:10px}}
+</style>
+</head>
+<body>
+<div class="root">
+  <div class="wrap">
+    <nav class="nav">
+      <div class="brand"><div class="mark"></div>ZeTaX</div>
+      <div class="links"><a href="#features">Features</a><a href="#demo">Demo Lab</a><a href="#players">Players</a><a href="#about">About</a></div>
+      <div class="nav-actions"><button class="btn" id="login">Log in</button><button class="btn primary" id="uploadNav">Upload demo</button></div>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow"><span class="dot"></span> CS2 DEMO INTELLIGENCE</div>
+        <h1>Turn your <span class="accent">demo</span> into content.</h1>
+        <p>ZeTaX analyzes Counter-Strike 2 demos, finds the plays that matter, explains what happened, and turns your best moments into short-form content.</p>
+        <div class="hero-actions"><button class="btn primary" id="heroUpload">Analyze a demo →</button><button class="btn" onclick="document.querySelector('#features').scrollIntoView()">Explore platform</button></div>
+        <div class="trust"><strong>BUILT FOR CS2</strong><span>•</span><span>Demo analysis</span><span>•</span><span>Highlights</span><span>•</span><span>Shorts</span></div>
+      </section>
+
+      <section class="grid">
+        <div class="stat"><b>01</b><span>Upload a .dem file</span></div>
+        <div class="stat"><b>AI</b><span>Play & death analysis</span></div>
+        <div class="stat"><b>9:16</b><span>Shorts-ready exports</span></div>
+        <div class="stat"><b>XP</b><span>Progress & challenges</span></div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="section-head"><div><div class="kicker">The platform</div><h2>Everything around the demo.</h2></div><p>From raw rounds to shareable clips and long-term player insights, the goal is one place for your CS2 performance and content.</p></div>
+        <div class="features">
+          <article class="card"><div class="icon">01</div><h3>Demo Intelligence</h3><p>Parse rounds, kills, deaths, utility, positions and timing. Build a searchable timeline of what happened in every round.</p></article>
+          <article class="card"><div class="icon">02</div><h3>Highlight Engine</h3><p>Score impactful plays and surface clutch rounds, multi-kills, entries, smart utility and moments worth watching.</p></article>
+          <article class="card"><div class="icon">03</div><h3>Auto Shorts</h3><p>Turn selected plays into vertical 9:16 clips designed for YouTube Shorts, TikTok and Instagram Reels.</p></article>
+          <article class="card"><div class="icon">04</div><h3>Death Analysis</h3><p>See where and when you died, what happened before the duel, and patterns that repeat across matches.</p></article>
+          <article class="card"><div class="icon">05</div><h3>Player Progress</h3><p>Track performance over time with personal statistics, XP, challenges, badges and match history.</p></article>
+          <article class="card"><div class="icon">06</div><h3>Profiles & Rankings</h3><p>Build a ZeTaX identity with your best plays, statistics, achievements and community leaderboard position.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="demo">
+        <div class="section-head"><div><div class="kicker">Demo Lab</div><h2>Drop a demo. Find the moment.</h2></div><p>This prototype shows the workflow. The real parser and AI pipeline can plug into this interface later.</p></div>
+        <div class="demo">
+          <div class="panel"><div class="panel-top"><span class="panel-title">Analyze new demo</span><span class="badge">READY</span></div><div class="upload"><div><b>Drop your CS2 .dem here</b><span>or choose a demo file from your computer</span><br><button class="btn primary" id="chooseDemo">Choose demo</button></div></div></div>
+          <div class="panel"><div class="panel-top"><span class="panel-title">Recent analysis</span><span class="badge">3 DEMOS</span></div><div class="rows"><div class="row"><div><b>Premier #1847</b><br><small>Mirage • 34:12</small></div><span class="score">92</span></div><div class="row"><div><b>Premier #1842</b><br><small>Ancient • 31:06</small></div><span class="score">87</span></div><div class="row"><div><b>Faceit #7721</b><br><small>Inferno • 29:41</small></div><span class="score">81</span></div></div></div>
+        </div>
+      </section>
+
+      <section class="section" id="players">
+        <div class="section-head"><div><div class="kicker">Community</div><h2>ZeTaX leaderboard.</h2></div><p>Example interface for the future XP, challenge and profile system.</p></div>
+        <div class="panel">
+          <div class="leader"><span class="rank">01</span><span class="avatar">Y</span><span class="lname"><b>YeeT</b><br><small>ZeTaX</small></span><span class="xp">12,840 XP</span></div>
+          <div class="leader"><span class="rank">02</span><span class="avatar">M</span><span class="lname"><b>Melcers</b><br><small>ZeTaX</small></span><span class="xp">11,930 XP</span></div>
+          <div class="leader"><span class="rank">03</span><span class="avatar">M</span><span class="lname"><b>Monolith</b><br><small>ZeTaX</small></span><span class="xp">10,775 XP</span></div>
+          <div class="leader"><span class="rank">04</span><span class="avatar">F</span><span class="lname"><b>Fūns</b><br><small>ZeTaX</small></span><span class="xp">9,460 XP</span></div>
+          <div class="leader"><span class="rank">05</span><span class="avatar">W</span><span class="lname"><b>Wiffu</b><br><small>ZeTaX</small></span><span class="xp">8,915 XP</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="about"><div class="cta"><div class="kicker">ZE T A X / CS2</div><h2>Make every round useful.</h2><p>ZeTaX is being designed around one idea: your demo contains more information than a scoreboard can show. Turn that information into improvement, competition and content.</p><button class="btn primary" id="ctaUpload">Start with a demo →</button></div></section>
+    </main>
+
+    <footer class="footer"><div>© 2026 ZeTaX. CS2 demo intelligence.</div><div>Built for players • creators • teams</div></footer>
+  </div>
+</div>
+<div class="modal" id="modal"><div class="modal-box"><button class="close" id="close">×</button><h3>Analyze a CS2 demo</h3><p>Choose a local <b>.dem</b> file. This first website prototype only demonstrates the interface; the actual parser will be connected in the next build stage.</p><input class="input" type="file" accept=".dem"><button class="btn primary" id="start">Continue →</button></div></div>
+<div class="toast" id="toast">Demo workflow opened.</div>
+<script>
+const modal=document.getElementById('modal'),toast=document.getElementById('toast');
+function openModal(){modal.classList.add('open')};
+function closeModal(){modal.classList.remove('open')};
+['uploadNav','heroUpload','chooseDemo','ctaUpload'].forEach(id=>document.getElementById(id).addEventListener('click',openModal));
+document.getElementById('login').addEventListener('click',()=>{toast.textContent='Account system coming next.';toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2200)});
+document.getElementById('close').addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+document.getElementById('start').addEventListener('click',()=>{toast.textContent='Demo selected — analysis pipeline is the next build stage.';toast.classList.add('show');closeModal();setTimeout(()=>toast.classList.remove('show'),2800)});
+</script>
+</body>
+</html>
